@@ -1005,7 +1005,7 @@ public static void destroy(byte[] bytes) {
 
 There is also one important thing to consider. All this data is stored in RAM (**RAM**), right? When memory is not enough, data that is rarely used can **swap**'d to disk. Here it is important, in case sensitive data is stored in memory for a long time (let's say we cached it), it should **never be swapped to disk**. This can lead to a big internal threat if an attacker gets into the server, because disk is much easier to analyze than memory, and even if the data has already been deleted from it, if that memory segment has not been overwritten, it can be recovered.
 
-On UNIX systems, it is realized through memory allocation and `mlock` settings on them, and from Java, to allocate non-swappable memory, followed by its obfuscation can [Netryx Memory](https://github.com/OWASP/www-project-netryx) be used:
+On UNIX systems, it is realized through memory allocation and `mlock` settings on them, and from Java, to allocate non-swappable memory, followed by its obfuscation are both methods for protecting data stored in RAM. [OWASP Netryx](https://github.com/OWASP/www-project-netryx) can be used to accomplish this:
 
 ```java
 byte[] data = "sensitive data".getBytes();
